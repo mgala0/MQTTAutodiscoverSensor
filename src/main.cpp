@@ -68,12 +68,14 @@ void setup()
 
 void loop()
 {
-  ESPDummySensor.value = svalue;
-  svalue++;
+  //emulate sensor reading  
+  svalue++; // change "measured value", add 1degC
   if (svalue > 35)
-    svalue = 20;
+    svalue = 20; //"measured temperature" cannot be too high ;) 
+  //above lines in real sensor should be replaced with procedure that read data from hardware like BMP, DHT series, etc.  
+  ESPDummySensor.value = svalue; //assign "measured value" to sensor structure member  
   MQTTSendPayloadMessage(ESPDummySensor);
-  Serial.println("KABOOM!!!");
+  Serial.println("KABOOM!!!"); //debug, "hello world, i'm alive" replacement XD"
   delay(2000);
 }
 
